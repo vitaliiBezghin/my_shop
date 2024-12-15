@@ -13,13 +13,14 @@ return new class extends Migration {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('title');
             $table->longText('description');
             $table->string('city');
             $table->string('price');
             $table->string('currency');
             $table->string('address');
-            $table->unique(['title', 'user_id']);
+            $table->unique(['title','category_id', 'user_id']);
             $table->timestamps();
         });
     }
